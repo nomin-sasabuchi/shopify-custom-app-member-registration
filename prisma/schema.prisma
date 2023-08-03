@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// prisma参考(https://zenn.dev/smish0000/articles/f1a6f463417b65)
+
+// generator clientはprisma generateコマンドの対象を設定
+// ファイルの内容を更新してマイグレーションをした際に実行される
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource dbは使用するデータベースの情報を設定する
+// urlは環境変数を使用
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.sqlite"
+}
+
+// model booksはデータモデルを設定する。modelの後にテーブル名を指定し、フィールド・データタイプ、オプションを設定
+// @defaultでデフォルト値を指定
+model Session {
+  id          String    @id
+  shop        String
+  state       String
+  isOnline    Boolean   @default(false)
+  scope       String?
+  expires     DateTime?
+  accessToken String
+  userId      BigInt?
+}
+
+model QRCode {
+  id               Int      @id @default(autoincrement())
+  title            String
+  shop             String
+  productId        String
+  productHandle    String
+  productVariantId String
+  destination      String
+  scans            Int      @default(0)
+  createdAt        DateTime @default(now())
+}
+
+// 会員登録　氏名、生年月日、性別、電話番号、メールアドレス、メールお知らせ受信可否、パスワードを登録する。
+model Member {
+  id             Int      @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  birthday       DateTime
+  email          String
+  gender         Int
+  isReceiveEmail Boolean  @default(false)
+  password       Int
+  createdAt      DateTime @default(now())
+}
