@@ -1,10 +1,9 @@
-#プロジェクトのメタデータと構成を含むファイル。このファイルはアプリのルートを表します。
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-application_url = "https://pencil-meta-hit-oliver.trycloudflare.com"
-client_id = "e8d52447bd1a3aa0bd32f4ec64c06143"
-embedded = true
 name = "member-registration"
+client_id = "e8d52447bd1a3aa0bd32f4ec64c06143"
+application_url = "https://edition-os-walks-years.trycloudflare.com"
+embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
@@ -12,9 +11,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://pencil-meta-hit-oliver.trycloudflare.com/auth/callback",
-  "https://pencil-meta-hit-oliver.trycloudflare.com/auth/shopify/callback",
-  "https://pencil-meta-hit-oliver.trycloudflare.com/api/auth/callback",
+  "https://edition-os-walks-years.trycloudflare.com/auth/callback",
+  "https://edition-os-walks-years.trycloudflare.com/auth/shopify/callback",
+  "https://edition-os-walks-years.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
