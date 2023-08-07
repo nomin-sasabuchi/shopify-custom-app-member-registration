@@ -2,7 +2,7 @@
 
 name = "member-registration"
 client_id = "e8d52447bd1a3aa0bd32f4ec64c06143"
-application_url = "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com"
+application_url = "https://amazon-tray-nickel-describing.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com/auth/callback",
-  "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com/auth/shopify/callback",
-  "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com/api/auth/callback"
+  "https://amazon-tray-nickel-describing.trycloudflare.com/auth/callback",
+  "https://amazon-tray-nickel-describing.trycloudflare.com/auth/shopify/callback",
+  "https://amazon-tray-nickel-describing.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

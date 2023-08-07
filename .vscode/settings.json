@@ -1,0 +1,28 @@
+//設定を共有
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ],
+  "cSpell.words": [
+    "hiragino",
+    "index",
+    "js",
+    "mincho",
+    "mixins",
+    "tailwindcss",
+    "yu",
+    "aspida",
+    "mixin",
+    "Mypage",
+    "Gyochisokun"
+  ]
+}
+/*
+参考
+https://blog.gaji.jp/2020/08/28/4877/
+*/
