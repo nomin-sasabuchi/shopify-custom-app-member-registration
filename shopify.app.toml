@@ -2,18 +2,18 @@
 
 name = "member-registration"
 client_id = "e8d52447bd1a3aa0bd32f4ec64c06143"
-application_url = "https://furniture-nl-swedish-port.trycloudflare.com"
+application_url = "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "write_products,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://furniture-nl-swedish-port.trycloudflare.com/auth/callback",
-  "https://furniture-nl-swedish-port.trycloudflare.com/auth/shopify/callback",
-  "https://furniture-nl-swedish-port.trycloudflare.com/api/auth/callback"
+  "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com/auth/callback",
+  "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com/auth/shopify/callback",
+  "https://brunswick-meanwhile-currencies-streaming.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -11,14 +11,22 @@ import { restResources } from "@shopify/shopify-api/rest/admin/2023-07";
 import prisma from "./db.server";
 
 const shopify = shopifyApp({
+  // アプリのクライアント ID。Shopify パートナー ダッシュボードのアプリからコピーします。これは公開です。
   apiKey: process.env.SHOPIFY_API_KEY,
+  // アプリの API シークレット。Shopify パートナー ダッシュボードのアプリからコピーします。これはプライベートです。これをコミットしないでください。
   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
+  // 使用したい管理 API のバージョン。
+  // 新しいアプリを作成する場合は、LATEST_API_VERSION を使用します。
   apiVersion: LATEST_API_VERSION,
+  // アプリに必要な権限。
   scopes: process.env.SCOPES?.split(","),
+  // これはアプリの URL です。
   appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
+  // 使用する Shopify Admin REST API のバージョン。
+  // 新しいアプリを作成する場合は、LATEST_API_VERSION を使用します。
   restResources,
   webhooks: {
     APP_UNINSTALLED: {

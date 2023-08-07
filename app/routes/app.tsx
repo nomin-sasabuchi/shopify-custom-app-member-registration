@@ -31,7 +31,13 @@ export default function App() {
         <Link to="/app" rel="home">
           Home
         </Link>
+        <Link to="/app">
+          qrCodeサンプル
+        </Link>
         <Link to="/app/additional">Additional page</Link>
+        <Link to="/app/member-registration">
+          会員情報項目追加
+        </Link>
       </ui-nav-menu>
       <PolarisAppProvider
         i18n={polarisTranslations}
