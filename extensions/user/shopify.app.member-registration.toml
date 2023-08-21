@@ -1,0 +1,26 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "member-registration"
+client_id = "e8d52447bd1a3aa0bd32f4ec64c06143"
+application_url = "https://amazon-tray-nickel-describing.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,read_customers,write_customers"
+
+[auth]
+redirect_urls = [
+  "https://amazon-tray-nickel-describing.trycloudflare.com/auth/callback",
+  "https://amazon-tray-nickel-describing.trycloudflare.com/auth/shopify/callback",
+  "https://amazon-tray-nickel-describing.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-07"
+
+[pos]
+embedded = false
+
+[build]
+dev_store_url = "test-movie-theatre.myshopify.com"

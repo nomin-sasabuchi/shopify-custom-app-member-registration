@@ -1,0 +1,22 @@
+<form>
+  <button onclick="result()">proxy</button>
+</form>
+
+<script>
+  const proxyResult = fetch('/apps/proxy-user', {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => {
+    console.log('response', response);
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "User Edit Form",
+    "target": "section",
+    "settings": []
+  }
+{% endschema %}
