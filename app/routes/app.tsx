@@ -1,25 +1,25 @@
-import React from "react";
-import { json } from "@remix-run/node";
-import { Link, Outlet, useLoaderData, useRouteError } from "@remix-run/react";
-import { AppProvider as PolarisAppProvider } from "@shopify/polaris";
-import polarisStyles from "@shopify/polaris/build/esm/styles.css";
-import { boundary } from "@shopify/shopify-app-remix";
+import type { HeadersArgs, LoaderArgs } from "@remix-run/node"
+import { json } from "@remix-run/node"
+import { Link, Outlet, useLoaderData, useRouteError } from "@remix-run/react"
+import { AppProvider as PolarisAppProvider } from "@shopify/polaris"
+import polarisStyles from "@shopify/polaris/build/esm/styles.css"
+import { boundary } from "@shopify/shopify-app-remix"
+import { forwardRef } from "react"
+import { authenticate } from "../shopify.server"
 
-import { authenticate } from "../shopify.server";
+export const links = () => [{ rel: "stylesheet", href: polarisStyles }]
 
-export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
-
-export async function loader({ request }) {
-  await authenticate.admin(request);
+export async function loader({ request }: LoaderArgs) {
+  await authenticate.admin(request)
 
   return json({
     polarisTranslations: require("@shopify/polaris/locales/en.json"),
     apiKey: process.env.SHOPIFY_API_KEY,
-  });
+  })
 }
 
 export default function App() {
-  const { apiKey, polarisTranslations } = useLoaderData();
+  const { apiKey, polarisTranslations } = useLoaderData()
 
   return (
     <>
@@ -31,13 +31,7 @@ export default function App() {
         <Link to="/app" rel="home">
           Home
         </Link>
-        <Link to="/app">
-          qrCodeサンプル
-        </Link>
         <Link to="/app/additional">Additional page</Link>
-        <Link to="/app/member-registration">
-          会員情報項目追加
-        </Link>
       </ui-nav-menu>
       <PolarisAppProvider
         i18n={polarisTranslations}
@@ -46,21 +40,21 @@ export default function App() {
         <Outlet />
       </PolarisAppProvider>
     </>
-  );
+  )
 }
 
 /** @type {any} */
-const RemixPolarisLink = React.forwardRef((/** @type {any} */ props, ref) => (
-  <Link {...props} to={props.url ?? props.to} ref={ref}>
+const RemixPolarisLink: any = forwardRef((props: any, ref) => (
+  <Link {...props} to={props.url ?? props.to!} ref={ref}>
     {props.children}
   </Link>
-));
+))
 
 // Shopify needs Remix to catch some thrown responses, so that their headers are included in the response.
 export function ErrorBoundary() {
-  return boundary.error(useRouteError());
+  return boundary.error(useRouteError())
 }
 
-export const headers = (headersArgs) => {
-  return boundary.headers(headersArgs);
-};
+export const headers = (headersArgs: HeadersArgs) => {
+  return boundary.headers(headersArgs)
+}

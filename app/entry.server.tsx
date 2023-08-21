@@ -1,27 +1,25 @@
-// 参考(https://qiita.com/FAL-coffee/items/5f44dc785f3faf268fb6)
-import { PassThrough } from "stream";
-import { renderToPipeableStream } from "react-dom/server";
-import { Response } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import isbot from "isbot";
+import { Response } from "@remix-run/node"
+import { RemixServer } from "@remix-run/react"
+import type { EntryContext } from "@remix-run/react/dist/entry"
+import isbot from "isbot"
+import { renderToPipeableStream } from "react-dom/server"
+import { PassThrough } from "stream"
+import { addDocumentResponseHeaders } from "./shopify.server"
 
-import { addDocumentResponseHeaders } from "./shopify.server";
+const ABORT_DELAY = 5_000
 
-const ABORT_DELAY = 5_000;
-
-// handleDataRequestデータ要求の応答を変更できるオプションの関数をエクスポート
 export default async function handleRequest(
-  request,
-  responseStatusCode,
-  responseHeaders,
-  remixContext,
-  _loadContext
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext,
+  _loadContext: any
 ) {
-  addDocumentResponseHeaders(request, responseHeaders);
+  addDocumentResponseHeaders(request, responseHeaders)
 
   const callbackName = isbot(request.headers.get("user-agent"))
     ? "onAllReady"
-    : "onShellReady";
+    : "onShellReady"
 
   return new Promise((resolve, reject) => {
     const { pipe, abort } = renderToPipeableStream(
@@ -32,29 +30,29 @@ export default async function handleRequest(
       />,
       {
         [callbackName]: () => {
-          const body = new PassThrough();
+          const body = new PassThrough()
 
-          responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("Content-Type", "text/html")
 
           resolve(
             new Response(body, {
               headers: responseHeaders,
               status: responseStatusCode,
             })
-          );
+          )
 
-          pipe(body);
+          pipe(body)
         },
         onShellError(error) {
-          reject(error);
+          reject(error)
         },
         onError(error) {
-          responseStatusCode = 500;
-          console.error(error);
+          responseStatusCode = 500
+          console.error(error)
         },
       }
-    );
+    )
 
-    setTimeout(abort, ABORT_DELAY);
-  });
+    setTimeout(abort, ABORT_DELAY)
+  })
 }
