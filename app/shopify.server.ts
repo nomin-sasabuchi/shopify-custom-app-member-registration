@@ -8,6 +8,7 @@ import {
 import "@shopify/shopify-app-remix/adapters/node"
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma"
 
+import { shopifyApi } from "@shopify/shopify-api"
 import "@shopify/shopify-api/adapters/node"
 import prisma from "./db.server"
 
@@ -52,3 +53,14 @@ export const authenticate = shopify.authenticate
 export const login = shopify.login
 export const registerWebhooks = shopify.registerWebhooks
 export const sessionStorage = shopify.sessionStorage
+
+export const shopifyAPI = shopifyApi({
+  // The next 4 values are typically read from environment variables for added security
+  apiKey: process.env.SHOPIFY_API_KEY,
+  apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
+  apiVersion: LATEST_API_VERSION,
+  scopes: process.env.SCOPES?.split(","),
+  hostName: process.env.SHOPIFY_APP_URL || "",
+  isEmbeddedApp: false,
+  restResources,
+})
