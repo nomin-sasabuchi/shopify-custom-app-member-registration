@@ -1,18 +1,188 @@
-<form>
-  <button onclick="result()">proxy</button>
+<form
+  method="post"
+  action="/apps/proxy-user/user/update"
+  x-data="app"
+  x-init="await init"
+  >
+  <!-- 苗字 -->
+  <label for="LastName">
+    苗字
+  </label>
+  <input
+  type="text"
+    name="customer[last_name]"
+    id="LastName"
+    placeholder="山田"
+    required
+    x-model="customer.lastName">
+  <!-- 名前 -->
+  <div>
+    <label for="FirstName">名前</label>
+    <input
+      type="text"
+      name="customer[first_name]"
+      id="FirstName"
+      placeholder="太郎"
+      autofocus
+      x-model="customer.firstName">
+  </div>
+
+  <!-- 生年月日の取得 -->
+  <label for="birthday" class="label">生年月日</label>
+  <input
+    type="date"
+    name="customer[date_of_birth]"
+    id="birthday"
+    x-model="customer.birthday"
+    >
+  <!-- //End 生年月日の取得 -->
+
+  <!-- 性別の取得 -->
+    <div class="field-radio"> <label for="gender" class="label">性別</label>
+    <div>
+      <input
+        type="radio"
+        value="男性"
+        name="customer[gender]"
+        id="gender"
+        :checked="customer.gender == '男性'"
+         x-model="customer.gender"
+        />男性
+    </div>
+    <input
+      type="radio"
+      value="女性"
+      name="customer[gender]"
+      id="gender"
+      x-model="customer.gender"
+      :checked="customer.gender == '女性'"
+      >女性
+  </div>
+  <!-- //End 性別の取得 -->
+
+  <!-- DM受け取りの設定 -->
+  <div class="field-radio">
+    <label for="dm_setting" class="label">DM受け取りの設定</label>
+    <input
+      type="radio"
+      value="true"
+      name="customer[is_dm]"
+      id="dm_setting"
+      x-model="customer.isDm"
+      :checked="customer.isDm  == true"
+      >受け取る
+    <input
+      type="radio"
+      value="false"
+      name="customer[is_dm]"
+      x-model="customer.isDm"
+      :checked="customer.isDm == false"
+      id="dm_setting">受け取らない
+      
+  </div>
+
+  <div class="field">
+    <label for="AddressCompany">会社</label>
+    <input
+      type="text"
+      id="AddressCompany}"
+      name="address[company]"
+      x-model="customer.address.company">
+  </div>
+  <div class="field">
+    <label for="AddressAddress1">住所1</label>
+    <input
+      type="text"
+      id="AddressAddress1"
+      name="address[address1]"
+      placeholder="住所1"
+      x-model="customer.address.address1"
+      >
+
+  </div>
+  <div class="field">
+    <label for="AddressAddress2">建物名、部屋番号など</label>
+    <input
+      type="text"
+      id="AddressAddress2"
+      name="address[address2]"
+      x-model="customer.address.address2"
+      >
+  </div>
+  <div class="field">
+    <label for="AddressCity">市</label>
+    <input
+      type="text"
+      id="AddressCity"
+      name="address[city]"
+      x-model="customer.address.city"
+      >
+  </div>
+  <div class="field">
+    <label for="AddressZip">郵便番号</label>
+    <input
+      type="text"
+      id="AddressZip"
+      name="address[zip]"
+      x-model="customer.address.zip"
+      >
+  </div>
+  <div class="field">
+    <label for="AddressPhone">電話番号</label>
+    <input
+      type="tel"
+      id="AddressPhone"
+      name="address[phone]"
+      x-model="customer.address.phone"
+      >
+  </div>
+  <!-- //End DM受け取りの設定 -->
+  <button>送信する</button>
 </form>
 
+
 <script>
-  const proxyResult = fetch('/apps/proxy-user', {
-    headers: {
-      'Content-Type': 'application/json'
+  const convertGetCustomer = (res) => ({
+    lastName: res.lastName,
+    firstName: res.firstName,
+    birthday: res.metafields.edges.find(({node})=>node.key == "date_of_birth").node.value,
+    gender: res.metafields.edges.find(({node})=>node.key == "gender").node.value,
+    isDm: res.metafields.edges.find(({node})=>node.key == "is_dm").node.value,
+    address: {
+      company: res.addresses[0].company,
+      address1: res.addresses[0].address1,
+      address2: res.addresses[0].address2,
+      city: res.addresses[0].city,
+      zip: res.addresses[0].zip,
+      phone: res.addresses[0].phone
     }
-  }).then((response) => {
-    console.log('response', response);
+  })
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("app", () => ({
+      customer: {
+        lastName: "",
+        firstName:  "",
+        birthday: "",
+        gender: "",
+        isDm: "",
+        address: {
+          company: "",
+          address1: "",
+          address2: "",
+          city: "",
+          zip: "",
+          phone: ""
+        }
+      },
+      async init() {
+        const fetchData = await fetch("/apps/proxy-user/user/update")
+          .then((response) => response.json())
+        this.customer = convertGetCustomer(fetchData.res.data.customer)
+      }
+    }));
+
   });
 </script>
-
-
 {% schema %}
   {
     "name": "User Edit Form",

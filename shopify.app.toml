@@ -2,7 +2,7 @@
 
 name = "member-registration"
 client_id = "e8d52447bd1a3aa0bd32f4ec64c06143"
-application_url = "https://christine-soil-issn-discussed.trycloudflare.com"
+application_url = "https://liberty-literally-tokyo-understood.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = "write_products,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://christine-soil-issn-discussed.trycloudflare.com/auth/callback",
-  "https://christine-soil-issn-discussed.trycloudflare.com/auth/shopify/callback",
-  "https://christine-soil-issn-discussed.trycloudflare.com/api/auth/callback"
+  "https://liberty-literally-tokyo-understood.trycloudflare.com/auth/callback",
+  "https://liberty-literally-tokyo-understood.trycloudflare.com/auth/shopify/callback",
+  "https://liberty-literally-tokyo-understood.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

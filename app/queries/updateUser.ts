@@ -1,20 +1,32 @@
 export const UPDATE_USER = `#graphql
-mutation updateUser($input:CustomerInput!) {
-    customerUpdate(
-    input: $input
-    ) {
-        customer {
+mutation updateUser($input: CustomerInput!) {
+  customerUpdate(input: $input) {
+    customer {
+      firstName
+      lastName
+      metafields(first: 10) {
+        edges {
+          node {
+            value
+            key
+            id
+          }
+        }
+      }
+      phone
+      addresses {
+        address1
+        address2
+        city
+        company
         firstName
         lastName
-            metafields(first: 10) {
-                edges {
-                    node {
-                    value
-                    key
-                    id
-                    }
-                }
-            }
-        }
+        phone
+        zip
+      }
+    } userErrors {
+      field
+      message
     }
+  }
 }`

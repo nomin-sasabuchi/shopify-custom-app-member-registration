@@ -1,0 +1,93 @@
+<form method="post" action="/apps/proxy-user/user/create">
+  <!-- 苗字 -->
+  <label for="LastName">
+    苗字
+  </label>
+  <input
+  type="text"
+    name="customer[last_name]"
+    id="LastName"
+    placeholder="山田"
+    required>
+  <!-- 名前 -->
+  <div>
+    <label for="FirstName">名前</label>
+    <input
+      type="text"
+      name="customer[first_name]"
+      id="FirstName"
+      placeholder="太郎"
+      autofocus>
+  </div>
+  <!-- e-mail -->
+  <div>
+    <label for="Email">
+      e-mail
+    </label>
+    <input
+      type="email"
+      name="customer[email]"
+      id="Email"
+      placeholder="example@info.co.jp"
+      autocapitalize="off">
+  </div>
+  <!-- パスワード -->
+  <div>
+    <label for="CreatePassword">パスワード</label>
+    <input
+      type="password"
+      name="customer[password]"
+      id="CreatePassword">
+  </div>
+
+  <!-- 生年月日の取得 -->
+  <label for="birthday" class="label">生年月日</label>
+  <input
+    type="date"
+    name="customer[date_of_birth]"
+    id="birthday">
+  <!-- //End 生年月日の取得 -->
+
+  <!-- 性別の取得 -->
+    <div class="field-radio"> <label for="gender" class="label">性別</label>
+    <div>
+      <input
+        type="radio"
+        value="男性"
+        name="customer[gender]"
+        id="gender" />男性
+    </div>
+    <input
+      type="radio"
+      value="女性"
+      name="customer[gender]"
+      id="gender">女性
+  </div>
+  <!-- //End 性別の取得 -->
+
+  <!-- DM受け取りの設定 -->
+  <div class="field-radio">
+    <label for="dm_setting" class="label">DM受け取りの設定</label>
+    <input
+      type="radio"
+      value="true"
+      name="customer[is_dm]"
+      id="dm_setting">受け取る
+    <input
+      type="radio"
+      value="false"
+      name="customer[is_dm]"
+      id="dm_setting">受け取らない
+  </div>
+  <!-- //End DM受け取りの設定 -->
+  <button>送信する</button>
+</form>
+
+
+{% schema %}
+  {
+    "name": "User Cleate Form",
+    "target": "section",
+    "settings": []
+  }
+{% endschema %}

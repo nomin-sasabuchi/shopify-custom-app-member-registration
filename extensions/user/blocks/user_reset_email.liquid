@@ -1,0 +1,25 @@
+<form method="post" action="/apps/proxy-user/user/reset_email">
+  <!-- e-mail -->
+  <div>
+    <label for="Email">
+      e-mail
+    </label>
+    <input
+      type="email"
+      name="customer[reset_email]"
+      id="Email"
+      placeholder="example@info.co.jp"
+      autocapitalize="off">
+  </div>
+  <!-- //End DM受け取りの設定 -->
+  <button>送信する</button>
+</form>
+
+
+{% schema %}
+  {
+    "name": "User Reset Email Form",
+    "target": "section",
+    "settings": []
+  }
+{% endschema %}

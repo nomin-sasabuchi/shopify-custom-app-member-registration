@@ -1,1 +1,3 @@
-export * from './updateUser'
+export * from "./getUser"
+export * from "./updateMetafields"
+export * from "./updateUser"

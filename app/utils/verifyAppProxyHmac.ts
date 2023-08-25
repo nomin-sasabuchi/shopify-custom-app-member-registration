@@ -40,5 +40,9 @@ export const verifyAppProxyHmac = (
     .update(input)
     .digest("hex")
 
+  console.log("input", input)
+  console.log("hash", hash)
+  console.log("queryParams.signature", queryParams.signature)
+
   return queryParams.signature === hash
 }
